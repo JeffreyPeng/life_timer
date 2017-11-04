@@ -123,15 +123,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "common_static"),
-)
-
-STATICFILES_FINDERS = (
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
-)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # my config
 LOGIN_URL = '/user/login/'
