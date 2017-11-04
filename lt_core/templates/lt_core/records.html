@@ -1,0 +1,31 @@
+{% extends "lt_core/base.html" %}
+
+  {% block header %}
+    <h1>records</h1>
+  {% endblock header %}
+
+  {% block content %}
+
+    <ul>
+      {% for record in records %}
+        <li>
+          <h3 record_id='{{ record.id }}'>
+            <a>{{ record }}</a>
+            <button class='delRecord'>delete</button>       
+          </h3>
+        </li>
+      {% empty %}
+        <li>No topics have been added yet.</li>
+      {% endfor %}
+    </ul>
+
+
+    <script>
+      $(".delRecord").click(function(){
+          record_id = $(this).parent().attr('record_id')
+          $.post("/del_record/" + record_id + "/", {'csrfmiddlewaretoken': '{{ csrf_token }}'}, function(data) {
+              window.location.href = window.location.href
+          }, "json")
+      })
+  </script>
+  {% endblock content %}

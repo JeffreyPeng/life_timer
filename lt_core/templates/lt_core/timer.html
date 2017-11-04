@@ -1,0 +1,35 @@
+{% extends "lt_core/base.html" %}
+
+{% block header %}
+<div class='jumbotron'>
+    <h1>Timer page.</h1>
+</div>
+{% endblock header %}
+
+{% block content %}
+<h2>
+    This is Timer page.
+</h2>
+<h2>
+   start: {{ userState.last_start_time|date:'Y-m-d H:i:s' }}
+</h2>
+<h2>
+    {{ userState.last_start_topic.text }}
+</h2>
+<h2>
+    {{ userState.last_start_topic.total_delta }}
+</h2>
+
+<input type="text" id='lossInput' />
+<button id='btn1'>stop</button>
+
+      <script>
+          $("#btn1").click(function(){
+              loss_second = $("#lossInput").val()
+              $.post("/stop_timer/", {'loss_second': loss_second,'csrfmiddlewaretoken': '{{ csrf_token }}'}, function(data) {
+                  alert(data.success)
+                  window.location.href = window.location.href
+              }, "json")
+          })
+      </script>
+{% endblock content %}

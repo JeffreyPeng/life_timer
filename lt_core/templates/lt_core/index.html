@@ -1,0 +1,50 @@
+{% extends "lt_core/base.html" %}
+
+{% block header %}
+<div>
+    header
+</div>
+{% endblock header %}
+
+{% block content %}
+    <ul>
+        {% for topic in topics %}
+          <li>
+            <h3 topic_id='{{ topic.id }}'>
+              <a href="">{{ topic }}</a>
+              <button class='btnStart'>start</button>
+              <input type="text" />
+              <button class='btnAddTopic'>add topic</button> 
+              <a href="{% url 'lt_core:records' topic.id %}">明细</a>
+              <a>{{ topic.total_delta }}</a>            
+            </h3>
+          </li>
+        {% empty %}
+          <li>No topics have been added yet.</li>
+        {% endfor %}
+          <li>
+            <h3>
+              <input type="text" />
+              <button class='btnAddTopic'>add top topic</button>    
+            </h3>
+          </li>
+      </ul>
+
+      
+
+      <script>
+          $(".btnStart").click(function(){
+              topic_id = $(this).parent().attr('topic_id')
+              $.post("/start_timer/" + topic_id + "/", {'csrfmiddlewaretoken': '{{ csrf_token }}'}, function(data) {
+                  window.location.href = window.location.href
+              }, "json")
+          })
+          $(".btnAddTopic").click(function(){
+              text = $(this).prev('input').val()
+              parent_id = $(this).parent().attr('topic_id')
+              $.post("/add_topic/", {'parent_id': parent_id, 'text': text, 'csrfmiddlewaretoken': '{{ csrf_token }}'}, function(data) {
+                  window.location.href = window.location.href
+              }, "json")
+          })
+      </script>
+{% endblock content %}
