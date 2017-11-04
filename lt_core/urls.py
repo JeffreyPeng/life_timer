@@ -15,16 +15,3 @@ urlpatterns = [
     url(r'^records/(?P<topic_id>\d+)/$', views.records, name='records'),
     url(r'^del_record/(?P<record_id>\d+)/$', views.del_record, name='del_record'),
 ]
-
-'''
-# topics
-url(r'^topics/$', views.topics, name='topics'),
-# one topic
-url(r'^topics/(?P<topic_id>\d+)/$', views.topic, name='topic'),
-# add topic
-url(r'^new_topic/$', views.new_topic, name='new_topic'),
-# add entry
-url(r'^new_entry/(?P<topic_id>\d+)/$', views.new_entry, name='new_entry'),
-# edit entry
-url(r'^edit_entry/(?P<entry_id>\d+)/$', views.edit_entry, name='edit_entry'),
-'''
